@@ -1,23 +1,25 @@
 import { useState } from "react";
 
-const GuessInput = () => {
-  const [guess, setGuess] = useState("");
+const GuessInput = ({handleSubmitGuess}) => {
+  const [tempGuess, setTempGuess] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (guess.length !== 5) {
-      window.alert('please enter exactly 5 characters!')
-      return
+    if (tempGuess.length !== 5) {
+      window.alert("please enter exactly 5 characters!");
+      return;
     }
-    console.info({guess: guess})
-    setGuess("");
+    
+    console.info({ guess: tempGuess });
+    handleSubmitGuess(tempGuess)
+    setTempGuess("");
   };
 
   const transformToUpper = (event) => {
-    const input = event.target.value
+    const input = event.target.value;
     const uppertext = input.toUpperCase();
-    setGuess(uppertext);
+    setTempGuess(uppertext);
   };
 
   return (
@@ -26,7 +28,7 @@ const GuessInput = () => {
       <input
         id="guess-input"
         type="text"
-        value={guess}
+        value={tempGuess}
         onChange={transformToUpper}
         min={5}
         max={5}

@@ -1,8 +1,12 @@
+import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
+import { range } from "../../utils";
+import Guess from "./Guess";
+
 const GuessResult = ({ guesses }) => {
   return (
     <div className="guess-guesses">
-      {guesses?.map(({value, id}) => (
-        <p className="guess" key={id}>{value.toString()}</p>
+      {range(NUM_OF_GUESSES_ALLOWED).map(({ num }) => (
+        <Guess key={num} value={guesses[num]} />
       ))}
     </div>
   );

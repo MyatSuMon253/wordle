@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const GuessInput = ({handleSubmitGuess}) => {
+const GuessInput = ({gameStatus, handleSubmitGuess}) => {
   const [tempGuess, setTempGuess] = useState("");
 
   const handleSubmit = (event) => {
@@ -11,7 +11,6 @@ const GuessInput = ({handleSubmitGuess}) => {
       return;
     }
     
-    console.info({ guess: tempGuess });
     handleSubmitGuess(tempGuess)
     setTempGuess("");
   };
@@ -28,6 +27,7 @@ const GuessInput = ({handleSubmitGuess}) => {
       <input
         id="guess-input"
         type="text"
+        disabled={gameStatus !== 'running'}
         value={tempGuess}
         onChange={transformToUpper}
         min={5}
